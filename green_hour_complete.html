@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Green Hour — matcha drinks, calm moments, and a cozy café in Tabogon, Cebu.">
+  <title>Green Hour Café | Matcha & Calm Moments</title>
+  <style>
+    :root {
+      --green: #356b42;
+      --green-dark: #214b2c;
+      --green-light: #dff2d9;
+      --mint: #f3faef;
+      --cream: #fffdf6;
+      --text: #203326;
+      --muted: #5d6d60;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(24, 65, 33, .12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--mint);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(53, 107, 66, .97);
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+    }
+    .nav-wrap {
+      width: min(1180px, 92%);
+      min-height: 86px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .5px;
+      font-size: 1.25rem;
+      white-space: nowrap;
+    }
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.8);
+      background: var(--green-light);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 3vw, 34px);
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: .94rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: #d8f29b; }
+    .menu-toggle {
+      display: none;
+      color: white;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(125deg, #285b37, #6c9f62);
+      color: white;
+      overflow: hidden;
+    }
+    .hero-inner {
+      width: min(1180px, 92%);
+      margin: auto;
+      padding: clamp(48px, 7vw, 90px) 0;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: clamp(30px, 6vw, 76px);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 13px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2.5rem, 5.7vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 22px;
+      max-width: 700px;
+    }
+    .hero p { max-width: 610px; color: rgba(255,255,255,.91); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 21px;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.15); }
+    .btn-light { background: white; color: var(--green-dark); }
+    .btn-outline { color: white; border: 1px solid rgba(255,255,255,.75); background: transparent; }
+    .hero-image {
+      position: relative;
+      min-height: 350px;
+    }
+    .hero-image img {
+      width: 100%;
+      height: clamp(300px, 40vw, 470px);
+      object-fit: cover;
+      border: 9px solid rgba(255,255,255,.25);
+      border-radius: 48% 48% 24px 24px;
+      box-shadow: 0 22px 55px rgba(0,0,0,.2);
+    }
+    .image-note {
+      position: absolute;
+      right: -12px;
+      bottom: 20px;
+      padding: 12px 18px;
+      background: var(--cream);
+      color: var(--green-dark);
+      border-radius: 14px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    section.content-section {
+      width: min(1180px, 92%);
+      margin: auto;
+      padding: clamp(55px, 7vw, 88px) 0;
+    }
+    .section-heading { text-align: center; margin-bottom: 35px; }
+    .section-heading .kicker {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+      font-size: .78rem;
+    }
+    .section-heading h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--green-dark);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      margin: 8px 0 12px;
+    }
+    .section-heading p { max-width: 680px; margin: auto; color: var(--muted); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+    }
+    .about-copy h2 {
+      color: var(--green-dark);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .about-copy p { color: var(--muted); margin-bottom: 14px; }
+    .about-image img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .value {
+      padding: 16px;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 5px 18px rgba(24,65,33,.06);
+    }
+    .value strong { display: block; color: var(--green); margin-bottom: 3px; }
+    .value span { color: var(--muted); font-size: .9rem; }
+
+    .menu-section { background: #e7f4e0; }
+    .menu-section .content-section { padding-top: clamp(55px, 7vw, 88px); padding-bottom: clamp(55px, 7vw, 88px); }
+    .menu-tools {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 auto 28px;
+    }
+    .search-box {
+      width: min(340px, 100%);
+      border: 1px solid #c6d9c2;
+      border-radius: 999px;
+      background: white;
+      padding: 11px 17px;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(53,107,66,.14); }
+    .filter-btn {
+      padding: 10px 16px;
+      border: 1px solid #aac8a5;
+      border-radius: 999px;
+      background: white;
+      color: var(--green-dark);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--green); color: white; border-color: var(--green); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .drink-card {
+      overflow: hidden;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(24,65,33,.09);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .drink-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .drink-card[hidden] { display: none; }
+    .drink-card img {
+      width: 100%;
+      height: 245px;
+      object-fit: cover;
+      background: #d9e8d2;
+    }
+    .drink-info { padding: 19px 20px 22px; }
+    .drink-info h3 { color: var(--green-dark); font-size: 1.12rem; margin-bottom: 5px; }
+    .drink-info p { color: var(--muted); font-size: .94rem; min-height: 45px; }
+    .drink-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 15px; }
+    .drink-tag { color: var(--green); background: #edf7e8; padding: 5px 10px; border-radius: 999px; font-size: .78rem; font-weight: 800; }
+    .order-link { color: var(--green-dark); font-weight: 800; text-decoration: none; }
+    .order-link:hover { text-decoration: underline; }
+    .no-results { display: none; text-align: center; color: var(--muted); padding: 24px; }
+
+    .visit-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .visit-card {
+      padding: clamp(24px, 4vw, 38px);
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .visit-card h3 {
+      color: var(--green-dark);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.7rem;
+      margin-bottom: 14px;
+    }
+    .detail { margin: 12px 0; color: var(--muted); overflow-wrap: anywhere; }
+    .detail strong { color: var(--text); }
+    .visit-photo { width: 100%; height: 100%; min-height: 280px; object-fit: cover; border-radius: var(--radius); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .btn-green { background: var(--green); color: white; }
+    .btn-soft { background: var(--green-light); color: var(--green-dark); }
+
+    .site-footer { background: var(--green-dark); color: white; }
+    .footer-inner {
+      width: min(1180px, 92%);
+      margin: auto;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-inner p { color: rgba(255,255,255,.8); font-size: .9rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: white; text-decoration: none; font-size: .9rem; }
+    .footer-links a:hover { text-decoration: underline; }
+    .back-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-size: 1.25rem;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: none;
+    }
+    .back-top.show { display: block; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 800px) {
+      .hero-inner, .about-grid, .visit-panel { grid-template-columns: 1fr; }
+      .hero-inner { padding-top: 52px; }
+      .hero-image { min-height: 0; }
+      .hero-image img { height: 340px; border-radius: 28px; }
+      .image-note { right: 10px; }
+      .about-image img { height: 350px; }
+      .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .values { grid-template-columns: 1fr; }
+      .visit-photo { max-height: 360px; }
+    }
+    @media (max-width: 600px) {
+      .nav-wrap { min-height: 72px; gap: 12px; }
+      .brand { font-size: 1.05rem; }
+      .brand img { width: 46px; height: 46px; }
+      .menu-toggle { display: inline-block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 16px 5% 20px;
+        background: var(--green-dark);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+      .hero h1 { font-size: clamp(2.5rem, 12vw, 3.7rem); }
+      .hero p { font-size: 1rem; }
+      .hero-image img { height: 280px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 18px; }
+      .drink-card img { height: 250px; }
+      .menu-tools { align-items: stretch; }
+      .search-box { width: 100%; }
+      .filter-btn { flex: 1; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .btn { padding: 11px 17px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#top" aria-label="Green Hour home">
+        <img src="LOGO.jpg" alt="Green Hour logo" onerror="this.style.display='none'">
+        <span>GREEN HOUR</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">☰ Menu</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#top">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#menu">MENU</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div>
+          <span class="eyebrow">A little pause in your day</span>
+          <h1 id="heroTitle">Your daily dose of green.</h1>
+          <p>Slow down, sip something lovely, and find your calm at Green Hour. From fruity favorites to creamy matcha-inspired treats, there is a little happiness in every cup.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#menu">Explore our menu ↓</a>
+            <a class="btn btn-outline" href="#contact">Visit Green Hour</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="img8.jpg" alt="A featured Green Hour café drink" onerror="this.style.background='#d9e8d2'">
+          <div class="image-note">Sip slowly. Feel better. 💚</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="about" aria-labelledby="aboutTitle">
+      <div class="about-grid">
+        <div class="about-copy">
+          <span class="section-heading kicker">Our little corner of calm</span>
+          <h2 id="aboutTitle">Why Green Hour? Why not?</h2>
+          <p>Because in a world that is always loud, fast, and stressful, Green Hour gives you a moment to breathe.</p>
+          <p>Our drinks are more than a treat — they are a small break from the chaos. Think comforting flavors, a relaxing vibe, and a place to reset between classes or catch up with friends.</p>
+          <p>Whether you are studying, hanging out, or taking a quiet pause, we hope every visit brings you a little peace, clarity, and happiness.</p>
+          <div class="values">
+            <div class="value"><strong>Fresh vibes</strong><span>Bright, feel-good flavors.</span></div>
+            <div class="value"><strong>Cozy moments</strong><span>A break from the busy day.</span></div>
+            <div class="value"><strong>Made with care</strong><span>A drink for your mood.</span></div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="img7.jpg" alt="Green Hour café atmosphere" onerror="this.style.background='#d9e8d2'">
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu" aria-labelledby="menuTitle">
+      <div class="content-section">
+        <div class="section-heading">
+          <span class="kicker">Find your favorite</span>
+          <h2 id="menuTitle">A sip for every mood</h2>
+          <p>Explore the Green Hour favorites. Search for a drink or choose a category to narrow down the menu.</p>
+        </div>
+
+        <div class="menu-tools">
+          <label class="sr-only" for="menuSearch">Search drinks</label>
+          <input class="search-box" type="search" id="menuSearch" placeholder="Search drinks..." autocomplete="off">
+          <button class="filter-btn active" type="button" data-filter="all">All drinks</button>
+          <button class="filter-btn" type="button" data-filter="fruity">Fruity</button>
+          <button class="filter-btn" type="button" data-filter="creamy">Creamy</button>
+          <button class="filter-btn" type="button" data-filter="refreshing">Refreshing</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+          <article class="drink-card" data-category="fruity" data-name="strawberry drift">
+            <img src="Img1.jpg" alt="Strawberry Drift drink" loading="lazy">
+            <div class="drink-info"><h3>Strawberry Drift</h3><p>A sweet, berry-inspired favorite for a cheerful little treat.</p><div class="drink-bottom"><span class="drink-tag">Fruity</span><a class="order-link" href="#contact" aria-label="Ask about Strawberry Drift">Ask about it ↗</a></div></div>
+          </article>
+          <article class="drink-card" data-category="creamy" data-name="mocha mist">
+            <img src="img2.jpg" alt="Mocha Mist drink" loading="lazy">
+            <div class="drink-info"><h3>Mocha Mist</h3><p>A smooth, chocolatey café-style pick for cozy moments.</p><div class="drink-bottom"><span class="drink-tag">Creamy</span><a class="order-link" href="#contact" aria-label="Ask about Mocha Mist">Ask about it ↗</a></div></div>
+          </article>
+          <article class="drink-card" data-category="refreshing" data-name="tropical mirage">
+            <img src="img3.jpg" alt="Tropical Mirage drink" loading="lazy">
+            <div class="drink-info"><h3>Tropical Mirage</h3><p>A bright tropical-inspired drink that feels like a mini getaway.</p><div class="drink-bottom"><span class="drink-tag">Refreshing</span><a class="order-link" href="#contact" aria-label="Ask about Tropical Mirage">Ask about it ↗</a></div></div>
+          </article>
+          <article class="drink-card" data-category="fruity" data-name="mango gleam">
+            <img src="img4.jpg" alt="Mango Gleam drink" loading="lazy">
+            <div class="drink-info"><h3>Mango Gleam</h3><p>A sunny mango-inspired sip with a bright, fruity mood.</p><div class="drink-bottom"><span class="drink-tag">Fruity</span><a class="order-link" href="#contact" aria-label="Ask about Mango Gleam">Ask about it ↗</a></div></div>
+          </article>
+          <article class="drink-card" data-category="creamy" data-name="cloud whip">
+            <img src="img5.jpg" alt="Cloud Whip drink" loading="lazy">
+            <div class="drink-info"><h3>Cloud Whip</h3><p>A soft, creamy treat for days when you want something comforting.</p><div class="drink-bottom"><span class="drink-tag">Creamy</span><a class="order-link" href="#contact" aria-label="Ask about Cloud Whip">Ask about it ↗</a></div></div>
+          </article>
+          <article class="drink-card" data-category="refreshing" data-name="glacial sip">
+            <img src="img6.jpg" alt="Glacial Sip drink" loading="lazy">
+            <div class="drink-info"><h3>Glacial Sip</h3><p>A cool, refreshing choice for a little reset during your day.</p><div class="drink-bottom"><span class="drink-tag">Refreshing</span><a class="order-link" href="#contact" aria-label="Ask about Glacial Sip">Ask about it ↗</a></div></div>
+          </article>
+        </div>
+        <p class="no-results" id="noResults" role="status">No drinks found. Try another search.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact" aria-labelledby="contactTitle">
+      <div class="section-heading">
+        <span class="kicker">Come say hello</span>
+        <h2 id="contactTitle">Your Green Hour awaits</h2>
+        <p>Drop by for a drink, bring a friend, or contact us to ask about our menu.</p>
+      </div>
+      <div class="visit-panel">
+        <div class="visit-card">
+          <h3>Plan your visit</h3>
+          <p class="detail">📍 <strong>Location:</strong> Kal-anan, Tabogon, Cebu</p>
+          <p class="detail">🕒 <strong>Opening hours:</strong> 8:00 AM – 9:00 PM</p>
+          <p class="detail">✉️ <strong>Email:</strong> <a href="mailto:freshgracecarreon@gmail.com">freshgracecarreon@gmail.com</a></p>
+          <p class="detail">📞 <strong>Phone:</strong> <a href="tel:+639283971623">+63 928 397 1623</a></p>
+          <div class="contact-actions">
+            <a class="btn btn-green" href="mailto:freshgracecarreon@gmail.com?subject=Green%20Hour%20Inquiry">Email us</a>
+            <a class="btn btn-soft" href="tel:+639283971623">Call us</a>
+          </div>
+        </div>
+        <img class="visit-photo" src="img7.jpg" alt="A look at Green Hour" loading="lazy">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>GREEN HOUR</strong><p>Take a breath. Take a sip. Stay a while.</p></div>
+      <div class="footer-links"><a href="#top">Home</a><a href="#about">About</a><a href="#menu">Menu</a><a href="#contact">Contact</a></div>
+      <p>© <span id="year"></span> Green Hour. Made with care. 💚</p>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕ Close' : '☰ Menu';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰ Menu';
+      });
+    });
+
+    // Search and category filters work together.
+    const searchInput = document.getElementById('menuSearch');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const drinkCards = document.querySelectorAll('.drink-card');
+    const noResults = document.getElementById('noResults');
+    let activeFilter = 'all';
+
+    function filterMenu() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      drinkCards.forEach(card => {
+        const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
+        const matchesSearch = card.dataset.name.includes(searchTerm) ||
+          card.textContent.toLowerCase().includes(searchTerm);
+        const visible = matchesCategory && matchesSearch;
+        card.hidden = !visible;
+        if (visible) visibleCount++;
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    searchInput.addEventListener('input', filterMenu);
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(item => item.classList.toggle('active', item === button));
+        filterMenu();
+      });
+    });
+
+    // Current year and back-to-top button
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('show', window.scrollY > 450);
+    });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
